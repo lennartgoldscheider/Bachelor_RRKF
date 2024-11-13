@@ -57,13 +57,6 @@ end
 function prediction_rrkf(Phi, mu, Sigma_sqrt, A, B, time_size, step_number, Q_sqrt= nothing)
     n,r = size(Sigma_sqrt)
 
-    #if Q_sqrt == nothing
-    #    Q_sqrt = DLRA(A, B, r, time_size, step_number)
-    #    F = svd([Phi*Sigma_sqrt Q_sqrt], full = true)
-    #else
-    #    F = svd([Phi*Sigma_sqrt.factor Q_sqrt.factor], full = true)
-    #end
-
     # Falls Q^(1/2) nicht übergeben wird, wird die Matrix hier berechnet.
     if Q_sqrt == nothing
         Q_sqrt = DLRA(A, B, r, time_size, step_number)
@@ -153,7 +146,7 @@ function update_rrkf(mu_minus, R_sqrt, C, Pi_sqrt, y, r)
 
 end
 
-# Smoothing Algorithm zur Vollständigkeit, wird nicht benutzt.
+# Smoothing Algorithmus zur Vollständigkeit, wird nicht benutzt.
 function backward_kernel_rrkf(Pi_sqrt_next, Phi_next, Sigma_sqrt, mu_next_minus, mu, Q_sqrt_next)
 
     n,r = size(Sigma_sqrt.factor)
