@@ -172,7 +172,6 @@ function evaluation_for_spatial_lengthscale(ℓₓ)
     etkf_cov_distance_per_nval = Vector{Float64}[]
 
     for cur_nval in nval_list
-        cur_nval = 441
         @info "R = $cur_nval"
 
         cur_rrkf_estimate = RRKF.estimate_states(
@@ -192,12 +191,6 @@ function evaluation_for_spatial_lengthscale(ℓₓ)
         cur_rrkf_rmse_to_truth = nanrmse(cur_rrkf_means * ssm.H', stacked_ground_truth)
         cur_rrkf_rmse_to_kf = rmsd(cur_rrkf_means, kf_means)
         cur_rrkf_cov_distance = mean([norm(Matrix(SC) - Matrix(KC)) / norm(Matrix(KC)) for (SC, KC) in zip(cur_rrkf_sol.Σ, kf_sol.Σ)])
-
-        println("rrkf rmse to truth: ",cur_rrkf_rmse_to_truth)
-        println("rrkf rmse to kf: ",cur_rrkf_rmse_to_kf)
-        println("rrkf cov distance: ",cur_rrkf_cov_distance)
-        println("------------")
-
 
         push!(rrkf_rmse_to_test_per_nval, cur_rrkf_rmse_to_test)
         push!(rrkf_rmse_to_truth_per_nval, cur_rrkf_rmse_to_truth)
@@ -234,11 +227,6 @@ function evaluation_for_spatial_lengthscale(ℓₓ)
             cur_enkf_rmse_to_kf = rmsd(cur_enkf_means, kf_means)
             cur_enkf_cov_distance = mean([norm(Matrix(SC) - Matrix(KC)) / norm(Matrix(KC)) for (SC, KC) in zip(cur_enkf_sol.Σ, kf_sol.Σ)])
 
-            println("enkf rmse to truth: ",cur_enkf_rmse_to_truth)
-            println("enkf rmse to kf: ",cur_enkf_rmse_to_kf)
-            println("enkf cov distance: ",cur_enkf_cov_distance)
-            println("------------")
-
             push!(cur_enkf_rmse_to_test_per_enkf_loop, cur_enkf_rmse_to_test)
             push!(cur_enkf_rmse_to_truth_per_enkf_loop, cur_enkf_rmse_to_truth)
             push!(cur_enkf_rmse_to_kf_per_enkf_loop, cur_enkf_rmse_to_kf)
@@ -261,12 +249,6 @@ function evaluation_for_spatial_lengthscale(ℓₓ)
             cur_etkf_rmse_to_truth = nanrmse(cur_etkf_means * ssm.H', stacked_ground_truth)
             cur_etkf_rmse_to_kf = rmsd(cur_etkf_means, kf_means)
             cur_etkf_cov_distance = mean([norm(Matrix(SC) - Matrix(KC)) / norm(Matrix(KC)) for (SC, KC) in zip(cur_etkf_sol.Σ, kf_sol.Σ)])
-            
-            println("etkf rmse to truth: ",cur_etkf_rmse_to_truth)
-            println("etkf rmse to kf: ",cur_etkf_rmse_to_kf)
-            println("etkf cov distance: ",cur_etkf_cov_distance)
-            println("------------")
-            
             
             push!(cur_etkf_rmse_to_test_per_etkf_loop, cur_etkf_rmse_to_test)
             push!(cur_etkf_rmse_to_truth_per_etkf_loop, cur_etkf_rmse_to_truth)

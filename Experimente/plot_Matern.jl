@@ -6,9 +6,9 @@ using LaTeXStrings
 
 CairoMakie.activate!(type = "svg")
 
-loaded_results = load("./out/on-model_results_matern12.jld2")
+loaded_results = load("./Experimente/out/on-model_results_matern12.jld2")
 
-include("../plot_theme.jl")
+include("./plot_theme.jl")
 
 
 WIDTH, HEIGHT = FULL_WIDTH, 1.35FULL_HEIGHT
@@ -213,7 +213,7 @@ fig = begin
 end
 
 display(fig)
-save("./out/on-model_results_matern12.pdf", fig, pt_per_unit = 1)
+save("./Experimente/out/on-model_results_matern12.pdf", fig, pt_per_unit = 1)
 
 
 

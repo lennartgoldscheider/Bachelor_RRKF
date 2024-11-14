@@ -6,10 +6,10 @@ using LaTeXStrings
 
 CairoMakie.activate!(type = "svg")
 
-loaded_LA_results = load("./out/LA_results.jld2")
+loaded_LA_results = load("./Experimente/out/LA_results.jld2")
 
 
-include("../plot_theme.jl")
+include("./plot_theme.jl")
 
 
 WIDTH, HEIGHT = 0.43FULL_WIDTH, HALF_HEIGHT
@@ -226,4 +226,4 @@ fig = begin
 end
 
 display(fig)
-save("./out/LA_results.pdf", grid_plot, pt_per_unit = 1)
+save("./Experimente/out/LA_results.pdf", grid_plot, pt_per_unit = 1)
