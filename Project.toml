@@ -1,7 +1,7 @@
-[package]
-name = "Bachelor_RRKF"
-uuid = "ff7f33fb-12f4-4c6a-b60f-19d4a5c96a0b"
-version = "0.0.1"
+name = "RRKF"
+uuid = "80610001-70af-476f-8b94-182c508123cc"
+authors = ["Lennart "]
+version = "0.1.0"
 
 [deps]
 Distributions = "31c24e10-a181-5473-b8eb-7969acd0382f"
